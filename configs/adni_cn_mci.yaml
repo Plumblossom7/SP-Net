@@ -1,0 +1,8 @@
+﻿# Paths are placeholders. ADNI data are access-controlled and must never be committed.
+data_root: /path/to/CN_MCI_4modal_complete
+seed: 40
+batch_size: 64
+epochs_stage1: 120
+epochs_stage2: 60
+dti_features: fa
+fc_mode: positive

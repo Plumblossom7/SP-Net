@@ -1,0 +1,25 @@
+﻿# ADNI data and generated artifacts
+data/
+*.mat
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.nii
+*.nii.gz
+
+# Training outputs
+results/
+runs/
+ra/
+*.csv
+*.png
+*.pdf
+
+# Python and editor files
+__pycache__/
+*.py[cod]
+.venv/
+.vscode/
+.idea/
