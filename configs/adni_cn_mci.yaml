@@ -1,8 +1,41 @@
-﻿# Paths are placeholders. ADNI data are access-controlled and must never be committed.
+# StableV3 single-holdout configuration used for the final CN-versus-MCI run.
+# ADNI features are access-controlled and must never be committed.
 data_root: /path/to/CN_MCI_4modal_complete
-seed: 40
-batch_size: 64
-epochs_stage1: 120
-epochs_stage2: 60
-dti_features: fa
-fc_mode: positive
+mat_file: ROI_T1_fMRI_DTI_AAL90_CN_MCI_4modal_complete.mat
+subject_table_file: CN_MCI_4modal_complete_FN_subjects.csv
+asl_feature_file: ASL_CBF/CBF_AAL90_features.tsv
+fn_directory: FN
+expected_subject_count: 708
+
+seed: 42
+test_size: 0.15
+validation_size: 0.15
+dti_features: FA
+fc_mode: signed
+fc_keep_ratio: 0.2
+fn_keep_ratio: 1.0
+
+epochs: 250
+patience: 60
+disable_early_stopping: true
+track_test_curve: true
+batch_size: 24
+lr: 5.0e-5
+weight_decay: 1.0e-4
+no_bias_decay: false
+
+hidden: 16
+shared_dim: 48
+aux_dim: 16
+dropout: 0.5
+gcn_layers: 2
+graph_pooling: mean
+dropedge: 0.0
+tau: 0.07
+lambda_param: 0.5
+lcont: 0.01
+lothro: 0.01
+lspe: 0.05
+laux: 0.05
+lsupcon: 0.0
+supcon_temperature: 0.1

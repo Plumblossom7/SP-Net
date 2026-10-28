@@ -1,4 +1,4 @@
-﻿# SP-Net
+# SP-Net
 
 SP-Net is a four-modality graph neural network for ADNI CN-versus-MCI
 classification. It uses T1 gray-matter ROI features, BOLD functional
@@ -7,18 +7,16 @@ and ASL cerebral-blood-flow ROI features.
 
 ## Repository layout
 
-- `spnet/model.py` — SP-Net model and loss functions.
-- `spnet/data.py` — ID-aligned, leakage-free ADNI four-modality data loader.
-- `spnet/graph.py` — graph construction, reproducibility helpers, and metrics.
-- `spnet/engine.py` — training, validation, test evaluation, and early stopping.
-- `spnet/attribution.py` — ROI attribution utilities.
-- `scripts/train.py` — five-fold CN-versus-MCI training entry point.
-- `configs/adni_cn_mci.yaml` — documented default settings.
+- `spnet/data.py` — ID-aligned, leakage-free ADNI four-modality loader.
+- `spnet/stable_model.py` — StableV3 model used by the final experiment.
+- `spnet/stable_engine.py` — end-to-end training and evaluation helpers.
+- `scripts/train.py` — single stratified CN-versus-MCI training entry point.
+- `configs/adni_cn_mci.yaml` — executable final-experiment configuration.
 
 ## Data access
 
-ADNI data are access-controlled and are deliberately excluded from this
-repository. Prepare the following layout from data obtained through ADNI:
+ADNI data are access-controlled and deliberately excluded from this repository.
+Prepare the following layout from data obtained through ADNI:
 
 ```text
 CN_MCI_4modal_complete/
@@ -45,8 +43,7 @@ pip install -r requirements.txt
 ```
 
 `torch-geometric` and `torch-scatter` wheels must be compatible with the
-installed PyTorch and CUDA versions; consult the PyG installation guide if a
-binary wheel is not available for your platform.
+installed PyTorch and CUDA versions.
 
 ## Training
 
@@ -62,12 +59,15 @@ For a short smoke test:
 python scripts/train.py --data-root /path/to/CN_MCI_4modal_complete --quick
 ```
 
-Each outer fold keeps its test set untouched; a validation partition is drawn
-only from the remaining training participants. Results, predictions, and model
-checkpoints are written under `ra/`, which is ignored by Git.
+The default configuration is the final StableV3 setting: seed 42, a single
+stratified 70%/15%/15% train/validation/test split, signed FC features with a
+0.2 edge retention ratio, FA node features, full FN structural graphs, AdamW
+at 5e-5, and 250 epochs. The validation split selects the checkpoint; the test
+curve is diagnostic only. Results, predictions, and model checkpoints are
+written under `ra/`, which is ignored by Git.
 
 ## Not included
 
 Raw/derived ADNI data, subject-level outputs, trained weights, TensorBoard
 logs, and exploratory or historical experiment scripts are intentionally not
-published. The code here is the focused CN-versus-MCI reproducibility release.
+published.
