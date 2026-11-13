@@ -1,4 +1,4 @@
-"""End-to-end training and evaluation helpers for StableV3."""
+"""End-to-end training and evaluation helpers for SP-Net."""
 
 import weakref
 

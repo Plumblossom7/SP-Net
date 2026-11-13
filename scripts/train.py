@@ -26,8 +26,8 @@ if str(REPOSITORY_ROOT) not in sys.path:
 
 from spnet.data import ADNIFourModalDataset
 from spnet.graph import IndexDataset, make_graph_lists, set_seed
-from spnet.stable_engine import evaluate_one_epoch, train_one_epoch, validate_one_epoch
-from spnet.stable_model import MultiModalGNNStableV3
+from spnet.training import evaluate_one_epoch, train_one_epoch, validate_one_epoch
+from spnet.model import SPNet
 
 
 def load_scalar_yaml(path):
@@ -57,7 +57,7 @@ def load_scalar_yaml(path):
 
 
 def make_model(functional_graphs, structural_graphs, config, device):
-    model = MultiModalGNNStableV3(
+    model = SPNet(
         in_dim1=functional_graphs[0].x.shape[1], in_dim2=structural_graphs[0].x.shape[1],
         aux_dim=config["aux_dim"], shared_dim=config["shared_dim"], private_dim=config["shared_dim"],
         num_classes=2, tau=config["tau"], lambda_param=config["lambda_param"], hidden=config["hidden"],

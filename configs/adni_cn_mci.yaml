@@ -1,4 +1,4 @@
-# StableV3 single-holdout configuration used for the final CN-versus-MCI run.
+# SP-Net single-holdout configuration used for the final CN-versus-MCI run.
 # ADNI features are access-controlled and must never be committed.
 data_root: /path/to/CN_MCI_4modal_complete
 mat_file: ROI_T1_fMRI_DTI_AAL90_CN_MCI_4modal_complete.mat

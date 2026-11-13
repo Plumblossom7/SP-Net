@@ -7,11 +7,11 @@ and ASL cerebral-blood-flow ROI features.
 
 ## Repository layout
 
-- `spnet/data.py` — ID-aligned, leakage-free ADNI four-modality loader.
-- `spnet/stable_model.py` — StableV3 model used by the final experiment.
-- `spnet/stable_engine.py` — end-to-end training and evaluation helpers.
-- `scripts/train.py` — single stratified CN-versus-MCI training entry point.
-- `configs/adni_cn_mci.yaml` — executable final-experiment configuration.
+- `scripts/train.py`: training entry point, checkpoint selection and reporting.
+- `spnet/data.py` and `spnet/graph.py`: data loading and graph construction.
+- `spnet/model.py` and `spnet/backbone.py`: model, backbone and loss functions.
+- `spnet/training.py`: training and evaluation functions.
+- `configs/adni_cn_mci.yaml`: experiment settings.
 
 ## Data access
 
@@ -59,7 +59,7 @@ For a short smoke test:
 python scripts/train.py --data-root /path/to/CN_MCI_4modal_complete --quick
 ```
 
-The default configuration is the final StableV3 setting: seed 42, a single
+The default configuration is the following settings: seed 42, a single
 stratified 70%/15%/15% train/validation/test split, signed FC features with a
 0.2 edge retention ratio, FA node features, full FN structural graphs, AdamW
 at 5e-5, and 250 epochs. The validation split selects the checkpoint; the test
